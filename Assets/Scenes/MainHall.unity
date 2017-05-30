@@ -573,6 +573,15 @@ Prefab:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: e5171f72421770240bd7c3989fe351e3, type: 2}
+      propertyPath: healthDrop
+      value: 
+      objectReference: {fileID: 1816689732081286, guid: c0b5040445f685b44898449abbc713a7,
+        type: 2}
+    - target: {fileID: 11400002, guid: e5171f72421770240bd7c3989fe351e3, type: 2}
+      propertyPath: dropChance
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e5171f72421770240bd7c3989fe351e3, type: 2}
   m_IsPrefabParent: 0
@@ -879,6 +888,17 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 114088751643957248, guid: 8452d464379008f4db37daa5fcaf8485,
+        type: 2}
+      propertyPath: healthDrop
+      value: 
+      objectReference: {fileID: 1816689732081286, guid: c0b5040445f685b44898449abbc713a7,
+        type: 2}
+    - target: {fileID: 114088751643957248, guid: 8452d464379008f4db37daa5fcaf8485,
+        type: 2}
+      propertyPath: dropChance
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8452d464379008f4db37daa5fcaf8485, type: 2}
   m_IsPrefabParent: 0
@@ -1023,6 +1043,17 @@ Prefab:
     - target: {fileID: 1156391387381422, guid: 8452d464379008f4db37daa5fcaf8485, type: 2}
       propertyPath: m_Name
       value: ZomBear (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114088751643957248, guid: 8452d464379008f4db37daa5fcaf8485,
+        type: 2}
+      propertyPath: healthDrop
+      value: 
+      objectReference: {fileID: 1816689732081286, guid: c0b5040445f685b44898449abbc713a7,
+        type: 2}
+    - target: {fileID: 114088751643957248, guid: 8452d464379008f4db37daa5fcaf8485,
+        type: 2}
+      propertyPath: dropChance
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8452d464379008f4db37daa5fcaf8485, type: 2}
@@ -2032,6 +2063,15 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: ea3c2728ef33e3a4d99527a86cda6465, type: 2}
+      propertyPath: ammoDrop
+      value: 
+      objectReference: {fileID: 1816689732081286, guid: c0b5040445f685b44898449abbc713a7,
+        type: 2}
+    - target: {fileID: 11400002, guid: ea3c2728ef33e3a4d99527a86cda6465, type: 2}
+      propertyPath: dropChance
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ea3c2728ef33e3a4d99527a86cda6465, type: 2}
   m_IsPrefabParent: 0
@@ -2163,7 +2203,7 @@ RectTransform:
   m_Children:
   - {fileID: 1891195242}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2365,6 +2405,7 @@ MonoBehaviour:
   - {fileID: 90273942}
   - {fileID: 1727774337}
   - {fileID: 2061174664}
+  dropChance: 10
 --- !u!1 &626590398
 GameObject:
   m_ObjectHideFlags: 0
@@ -2440,6 +2481,11 @@ Prefab:
     - target: {fileID: 1054286949448420, guid: 067c8320ec2f7cb4ba95293f30ee727e, type: 2}
       propertyPath: m_Name
       value: ZomBunny (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114348129086769872, guid: 067c8320ec2f7cb4ba95293f30ee727e,
+        type: 2}
+      propertyPath: dropChance
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 067c8320ec2f7cb4ba95293f30ee727e, type: 2}
@@ -2986,6 +3032,15 @@ Prefab:
       propertyPath: m_Name
       value: ZomBunnySpeed (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: e5171f72421770240bd7c3989fe351e3, type: 2}
+      propertyPath: dropChance
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: e5171f72421770240bd7c3989fe351e3, type: 2}
+      propertyPath: healthDrop
+      value: 
+      objectReference: {fileID: 1816689732081286, guid: c0b5040445f685b44898449abbc713a7,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e5171f72421770240bd7c3989fe351e3, type: 2}
   m_IsPrefabParent: 0
@@ -3096,8 +3151,61 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114721709809645140, guid: 05aaa64abc58a914db4e14521131aae7,
+        type: 2}
+      propertyPath: healthDrop
+      value: 
+      objectReference: {fileID: 1816689732081286, guid: c0b5040445f685b44898449abbc713a7,
+        type: 2}
+    - target: {fileID: 114721709809645140, guid: 05aaa64abc58a914db4e14521131aae7,
+        type: 2}
+      propertyPath: dropChance
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 05aaa64abc58a914db4e14521131aae7, type: 2}
+  m_IsPrefabParent: 0
+--- !u!1001 &786093747
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4832318356097044, guid: c0b5040445f685b44898449abbc713a7, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -40.324947
+      objectReference: {fileID: 0}
+    - target: {fileID: 4832318356097044, guid: c0b5040445f685b44898449abbc713a7, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0.29999447
+      objectReference: {fileID: 0}
+    - target: {fileID: 4832318356097044, guid: c0b5040445f685b44898449abbc713a7, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -46.727352
+      objectReference: {fileID: 0}
+    - target: {fileID: 4832318356097044, guid: c0b5040445f685b44898449abbc713a7, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4832318356097044, guid: c0b5040445f685b44898449abbc713a7, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4832318356097044, guid: c0b5040445f685b44898449abbc713a7, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4832318356097044, guid: c0b5040445f685b44898449abbc713a7, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4832318356097044, guid: c0b5040445f685b44898449abbc713a7, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: c0b5040445f685b44898449abbc713a7, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &793727413
 GameObject:
@@ -3216,6 +3324,7 @@ MonoBehaviour:
   - {fileID: 90273942}
   - {fileID: 1727774337}
   - {fileID: 2061174664}
+  dropChance: 10
 --- !u!1 &818619719
 GameObject:
   m_ObjectHideFlags: 0
@@ -4057,6 +4166,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 114348129086769872, guid: 067c8320ec2f7cb4ba95293f30ee727e,
+        type: 2}
+      propertyPath: dropChance
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 067c8320ec2f7cb4ba95293f30ee727e, type: 2}
   m_IsPrefabParent: 0
@@ -4124,6 +4238,7 @@ MonoBehaviour:
   - {fileID: 1392076176}
   - {fileID: 263090434}
   - {fileID: 1796040466}
+  dropChance: 10
 --- !u!4 &1220874662
 Transform:
   m_ObjectHideFlags: 0
@@ -4173,7 +4288,7 @@ Transform:
   - {fileID: 819340187}
   - {fileID: 1613466046}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1224297492
 GameObject:
@@ -4492,6 +4607,7 @@ MonoBehaviour:
   - {fileID: 90273942}
   - {fileID: 1727774337}
   - {fileID: 2061174664}
+  dropChance: 10
 --- !u!1001 &1266515827
 Prefab:
   m_ObjectHideFlags: 0
@@ -4530,6 +4646,11 @@ Prefab:
     - target: {fileID: 4815349345981560, guid: 067c8320ec2f7cb4ba95293f30ee727e, type: 2}
       propertyPath: m_RootOrder
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 114348129086769872, guid: 067c8320ec2f7cb4ba95293f30ee727e,
+        type: 2}
+      propertyPath: dropChance
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 067c8320ec2f7cb4ba95293f30ee727e, type: 2}
@@ -4645,6 +4766,7 @@ MonoBehaviour:
   - {fileID: 1392076176}
   - {fileID: 263090434}
   - {fileID: 1796040466}
+  dropChance: 10
 --- !u!4 &1307196120
 Transform:
   m_ObjectHideFlags: 0
@@ -4966,6 +5088,7 @@ MonoBehaviour:
   - {fileID: 1705542471}
   - {fileID: 626590399}
   - {fileID: 170961833}
+  dropChance: 10
 --- !u!4 &1365681215
 Transform:
   m_ObjectHideFlags: 0
@@ -5258,6 +5381,7 @@ MonoBehaviour:
   - {fileID: 1392076176}
   - {fileID: 263090434}
   - {fileID: 1796040466}
+  dropChance: 10
 --- !u!4 &1411841019
 Transform:
   m_ObjectHideFlags: 0
@@ -5313,6 +5437,11 @@ Prefab:
     - target: {fileID: 1054286949448420, guid: 067c8320ec2f7cb4ba95293f30ee727e, type: 2}
       propertyPath: m_Name
       value: ZomBunny (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114348129086769872, guid: 067c8320ec2f7cb4ba95293f30ee727e,
+        type: 2}
+      propertyPath: dropChance
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 067c8320ec2f7cb4ba95293f30ee727e, type: 2}
@@ -7706,6 +7835,7 @@ MonoBehaviour:
   - {fileID: 1705542471}
   - {fileID: 626590399}
   - {fileID: 170961833}
+  dropChance: 10
 --- !u!4 &1872857051
 Transform:
   m_ObjectHideFlags: 0
@@ -7826,6 +7956,7 @@ MonoBehaviour:
   - {fileID: 1705542471}
   - {fileID: 626590399}
   - {fileID: 170961833}
+  dropChance: 10
 --- !u!4 &1886765030
 Transform:
   m_ObjectHideFlags: 0
@@ -8155,7 +8286,7 @@ Transform:
   - {fileID: 303968896}
   - {fileID: 763768619}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1934373857
 MonoBehaviour:

@@ -10,6 +10,8 @@ namespace CompleteProject
         public Transform[] spawnPoints;         // An array of the spawn points this enemy can spawn from.
         bool spawning = false;
 
+        public float dropChance = 10;
+
 
         void Start ()
         {
@@ -31,7 +33,9 @@ namespace CompleteProject
                 int spawnPointIndex = Random.Range(0, spawnPoints.Length);
 
                 // Create an instance of the enemy prefab at the randomly selected spawn point's position and rotation.
-                Instantiate(enemy, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
+                GameObject enemySpawned = Instantiate(enemy, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
+
+                enemySpawned.GetComponent<EnemyHealth>().dropChance = dropChance;
 
                 Invoke("Spawn", spawnInterval);
             }

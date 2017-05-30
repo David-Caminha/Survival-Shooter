@@ -6,6 +6,10 @@ namespace CompleteProject
     {
         EmotionManager emotionManager;
 
+        public GameObject healthDrop;
+        public GameObject ammoDrop;
+        public float dropChance = 10f;
+
         public int startingHealth = 100;            // The amount of health the enemy starts the game with.
         public int currentHealth;                   // The current health the enemy has.
         public float sinkSpeed = 2.5f;              // The speed at which the enemy sinks through the floor when dead.
@@ -80,6 +84,9 @@ namespace CompleteProject
             if(emotionManager)
                 emotionManager.AddEvent("Kill " + gameObject.name);
 
+            if (dropChance > 0)
+                DropItem();
+
             // The enemy is dead.
             isDead = true;
 
@@ -92,6 +99,16 @@ namespace CompleteProject
             // Change the audio clip of the audio source to the death clip and play it (this will stop the hurt clip playing).
             enemyAudio.clip = deathClip;
             enemyAudio.Play ();
+        }
+
+        void DropItem()
+        {
+            float rand = Random.Range(0f, 100f);
+            if(rand < dropChance)
+            {
+                Vector3 pickupPosition = new Vector3(transform.position.x, 0.3f, transform.position.z);
+                Instantiate(healthDrop, pickupPosition, Quaternion.identity);
+            }
         }
 
 

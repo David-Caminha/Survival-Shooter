@@ -9,6 +9,7 @@ namespace CompleteProject
     {
         EmotionManager emotionManager;
 
+        public int maxHealth = 100;
         public int startingHealth = 100;                            // The amount of health the player starts the game with.
         public int currentHealth;                                   // The current health the player has.
         public Slider healthSlider;                                 // Reference to the UI's health bar.
@@ -90,6 +91,8 @@ namespace CompleteProject
         public void Heal(int amount)
         {
             currentHealth += amount;
+            if (currentHealth > maxHealth)
+                currentHealth = maxHealth;
             healthSlider.value = currentHealth;
             if(emotionManager)
             {

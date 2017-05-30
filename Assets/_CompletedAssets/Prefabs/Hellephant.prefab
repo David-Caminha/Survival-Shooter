@@ -381,6 +381,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa10cc87aff30c04dbe0aa648f5b6adc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthDrop: {fileID: 1816689732081286, guid: c0b5040445f685b44898449abbc713a7, type: 2}
+  ammoDrop: {fileID: 0}
+  dropChance: 10
   startingHealth: 300
   currentHealth: 0
   sinkSpeed: 2.5
@@ -463,7 +466,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 1023097428578662}
   m_Enabled: 1
   m_Radius: 1.2
-  m_Speed: 1.5
+  m_Speed: 2
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
