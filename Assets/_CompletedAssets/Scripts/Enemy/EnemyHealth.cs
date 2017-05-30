@@ -4,6 +4,8 @@ namespace CompleteProject
 {
     public class EnemyHealth : MonoBehaviour
     {
+        EmotionManager emotionManager;
+
         public int startingHealth = 100;            // The amount of health the enemy starts the game with.
         public int currentHealth;                   // The current health the enemy has.
         public float sinkSpeed = 2.5f;              // The speed at which the enemy sinks through the floor when dead.
@@ -21,6 +23,8 @@ namespace CompleteProject
 
         void Awake ()
         {
+            emotionManager = EmotionManager.Instance;
+
             // Setting up the references.
             anim = GetComponent <Animator> ();
             enemyAudio = GetComponent <AudioSource> ();
@@ -73,6 +77,9 @@ namespace CompleteProject
 
         void Death ()
         {
+            if(emotionManager)
+                emotionManager.AddEvent("Kill " + gameObject.name);
+
             // The enemy is dead.
             isDead = true;
 

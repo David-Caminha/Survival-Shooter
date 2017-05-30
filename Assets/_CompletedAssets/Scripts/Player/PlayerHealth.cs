@@ -7,6 +7,8 @@ namespace CompleteProject
 {
     public class PlayerHealth : MonoBehaviour
     {
+        EmotionManager emotionManager;
+
         public int startingHealth = 100;                            // The amount of health the player starts the game with.
         public int currentHealth;                                   // The current health the player has.
         public Slider healthSlider;                                 // Reference to the UI's health bar.
@@ -20,12 +22,14 @@ namespace CompleteProject
         AudioSource playerAudio;                                    // Reference to the AudioSource component.
         PlayerMovement playerMovement;                              // Reference to the player's movement.
         PlayerShooting playerShooting;                              // Reference to the PlayerShooting script.
-        bool isDead;                                                // Whether the player is dead.
+        public bool isDead;                                                // Whether the player is dead.
         bool damaged;                                               // True when the player gets damaged.
 
 
         void Awake ()
         {
+            emotionManager = EmotionManager.Instance;
+
             // Setting up the references.
             anim = GetComponent <Animator> ();
             playerAudio = GetComponent <AudioSource> ();
@@ -72,10 +76,24 @@ namespace CompleteProject
             playerAudio.Play ();
 
             // If the player has lost all it's health and the death flag hasn't been set yet...
-            if(currentHealth <= 0 && !isDead)
+            if (currentHealth <= 0 && !isDead)
             {
+                if (emotionManager)
+                    emotionManager.AddEvent("Player dies");
                 // ... it should die.
-                Death ();
+                Death();
+            }
+            else if (emotionManager)
+                emotionManager.AddEvent("Player takes damage");
+        }
+
+        public void Heal(int amount)
+        {
+            currentHealth += amount;
+            healthSlider.value = currentHealth;
+            if(emotionManager)
+            {
+                emotionManager.AddEvent("Pickup Health");
             }
         }
 

@@ -6,11 +6,15 @@ using UnityEngine;
 
 public class EmotionManager : MonoBehaviour
 {
+    public string playerName;
+    public bool emotionalMechanics = false;
+    public float tutorialTime;
+
     public double ArousalValue;
     public double ValenceValue;
 
-    public ESLevel ArousalLevel;
-    public ESLevel ValenceLevel;
+    public ESLevel ArousalLevel; // [0-4]
+    public ESLevel ValenceLevel; // [0-4]
 
     public bool recording;
     public List<double> highestVal; // #[SC_h, HR_h, EMG1_h, EMG2_h]
@@ -21,7 +25,7 @@ public class EmotionManager : MonoBehaviour
     private List<List<double>> normalized_data = new List<List<double>>();// #[time_float, SC_n, HR_n, EMG1_n, EMG2_n]
     private List<List<double>> classified_data = new List<List<double>>(); // #[time_float, Arousal, Valence, Flags]
 
-    public List<List<String>> eventList = new List<List<string>>(); //[time, event]
+    public List<List<string>> eventList = new List<List<string>>(); //[time, event]
 
     //HR Filtering Threshold
     double HRMaxPosDev = 1.2;
@@ -63,9 +67,10 @@ public class EmotionManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        highestVal = new List<double> { Double.MinValue, Double.MinValue, Double.MinValue, Double.MinValue, Double.MinValue, Double.MinValue, Double.MinValue, Double.MinValue, Double.MinValue, Double.MinValue, Double.MinValue, Double.MinValue }; // #[SC_h, HR_h, EMG1_h, EMG2_h]
-        lowestVal = new List<double> { Double.MaxValue, Double.MaxValue, Double.MaxValue, Double.MaxValue, Double.MaxValue, Double.MaxValue, Double.MaxValue, Double.MaxValue, Double.MaxValue, Double.MaxValue, Double.MaxValue, Double.MaxValue }; // #[SC_l, HR_l, EMG1_l, EMG2_l]
+        highestVal = new List<double> { Double.MinValue, Double.MinValue, Double.MinValue, Double.MinValue, Double.MinValue, Double.MinValue}; // #[SC_h, HR_h, EMG1_h, EMG2_h]
+        lowestVal = new List<double> { Double.MaxValue, Double.MaxValue, Double.MaxValue, Double.MaxValue, Double.MaxValue, Double.MaxValue}; // #[SC_l, HR_l, EMG1_l, EMG2_l]
         recording = true;
+        LoadPlayerStats();
         StartCoroutine(BioSensorDataPool());
     }
 
@@ -77,8 +82,30 @@ public class EmotionManager : MonoBehaviour
 
     void OnGUI()
     {
-        GUI.Label(new Rect(10, Screen.height - 60, 80, 20), ArousalValue.ToString());
-        GUI.Label(new Rect(10, Screen.height - 30, 80, 20), ValenceValue.ToString());
+        GUI.Label(new Rect(10, Screen.height - 60, 80, 20), ArousalLevel.ToString());
+        GUI.Label(new Rect(10, Screen.height - 30, 80, 20), ValenceLevel.ToString());
+    }
+
+    public double AverageArousal()
+    {
+        double avg = 0;
+        for (int i = classified_data.Count - 1; i >= classified_data.Count - 10; i--)
+        {
+            avg += classified_data[i][1];
+        }
+        avg = avg / 10.0;
+        return avg;
+    }
+
+    public double AverageValence()
+    {
+        double avg = 0;
+        for (int i = classified_data.Count - 1; i >= classified_data.Count - 10; i--)
+        {
+            avg += classified_data[i][2];
+        }
+        avg = avg / 10.0;
+        return avg;
     }
 
     private IEnumerator BioSensorDataPool()
@@ -104,7 +131,6 @@ public class EmotionManager : MonoBehaviour
 
         while(recording)
         {
-            // Ch3: EMG1   Ch4: EMG2   Ch5: SC/GSR   Ch23: HR   
             bs_br.ReadDouble();
             bs_br.ReadDouble();
 
@@ -226,7 +252,7 @@ public class EmotionManager : MonoBehaviour
 
 
             // Normalize values
-            normalized_data.Add(new List<double> { smoothed_data[raw_data.Count - 1][0], 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 });
+            normalized_data.Add(new List<double> { smoothed_data[raw_data.Count - 1][0], 0, 0, 0, 0, 0, 0 });
 
             // GSR
             double GSR_n = (smoothed_data[raw_data.Count - 1][1] - lowestVal[0]) / (highestVal[0] - lowestVal[0]) * 100;
@@ -336,14 +362,140 @@ public class EmotionManager : MonoBehaviour
                 ValenceLevel = ESLevel.Low;
             if (EMG1_level == ESLevel.Low && EMG2_level == ESLevel.Low && HR_level == ESLevel.High)
                 ValenceLevel = ESLevel.High;
-            yield return new WaitForSeconds(0.05f);
+
+            classified_data.Add(new List<double> { smoothed_data[raw_data.Count - 1][0], (int) ArousalLevel, (int) ValenceLevel });
+
+
+            yield return new WaitForSecondsRealtime(0.05f);
         }
+    }
+
+    public void AddEvent(string e)
+    {
+        eventList.Add(new List<string> { (sw.ElapsedMilliseconds / 1000.00).ToString(), e });
+    }
+
+    public void SavePlayerStats()
+    {
+        string line1 = highestVal[0] + " " + highestVal[1] + " " + highestVal[2] + " " + highestVal[3];
+        string line2 = lowestVal[0] + " " + lowestVal[1] + " " + lowestVal[2] + " " + lowestVal[3];
+        string dir = Application.persistentDataPath + Path.DirectorySeparatorChar + playerName + Path.DirectorySeparatorChar;
+        string path = dir + "playerStats.txt";
+        Directory.CreateDirectory(dir);
+        StreamWriter file = new StreamWriter(path);
+        file.WriteLine(line1);
+        file.WriteLine(line2);
+
+        file.Close();
+    }
+
+    public void LoadPlayerStats()
+    {
+        string path = Application.persistentDataPath + Path.DirectorySeparatorChar + playerName + Path.DirectorySeparatorChar + "playerStats.txt";
+        string line1, line2;
+
+        if(File.Exists(path))
+        {
+            StreamReader file = new StreamReader(path);
+            line1 = file.ReadLine();
+            line2 = file.ReadLine();
+
+            file.Close();
+
+            string[] higher = line1.Split(null);
+            string[] lower = line2.Split(null);
+
+            double res;
+            bool success;
+
+            for (int i = 0; i < 4; i++)
+            {
+                success = Double.TryParse(higher[0], out res);
+                if (success)
+                    highestVal[i] = res;
+                else
+                {
+                    ResetStats();
+                    break;
+                }
+                success = Double.TryParse(lower[0], out res);
+                if (success)
+                    lowestVal[i] = res;
+                else
+                {
+                    ResetStats();
+                    break;
+                }
+            }
+        }
+    }
+
+    void ResetStats()
+    {
+        for(int i = 0; i < highestVal.Count; i++)
+        {
+            highestVal[i] = Double.MinValue;
+            lowestVal[i] = Double.MaxValue;
+        }
+    }
+
+    void DumpNormalizedValuesLog()
+    {
+        string path = Application.persistentDataPath + Path.DirectorySeparatorChar + playerName + Path.DirectorySeparatorChar + "NormalizedValuesLog.txt";
+        StreamWriter file = new StreamWriter(path);
+
+        string header = "Time;GSR;HR;EMG1_20;EMG1_100;EMG2_20;EMG2_100";
+        file.WriteLine(header);
+
+        for (int i = 0; i < normalized_data.Count; i++)
+        {
+            string s = normalized_data[i][0].ToString() + ";" + normalized_data[i][1].ToString() + ";" + normalized_data[i][2].ToString() + ";" + normalized_data[i][3].ToString() + ";" + normalized_data[i][4].ToString() + ";" + normalized_data[i][5].ToString() + ";" + normalized_data[i][6].ToString();
+            file.WriteLine(s);
+        }
+
+        file.Close();
+    }
+
+    void DumpAVLog()
+    {
+        string path = Application.persistentDataPath + Path.DirectorySeparatorChar + playerName + Path.DirectorySeparatorChar + "AVlog.txt";
+        StreamWriter file = new StreamWriter(path);
+
+        string header = "Time;Arousal;Valence";
+        file.WriteLine(header);
+
+        for (int i = 0; i < classified_data.Count; i++)
+        {
+            string s = classified_data[i][0].ToString() + ";" + classified_data[i][1].ToString() + ";" + classified_data[i][2].ToString();
+            file.WriteLine(s);
+        }
+
+        file.Close();
+    }
+
+    void DumpEventLog()
+    {
+        string path = Application.persistentDataPath + Path.DirectorySeparatorChar + playerName + Path.DirectorySeparatorChar + "EventLog.txt";
+        StreamWriter file = new StreamWriter(path);
+
+        string header = "Time;Event";
+        file.WriteLine(header);
+
+        for (int i = 0; i < eventList.Count; i++)
+        {
+            string s = eventList[i][0].ToString() + ";" + eventList[i][1].ToString();
+            file.WriteLine(s);
+        }
+
+        file.Close();
     }
 
     void OnApplicationQuit()
     {
+        SavePlayerStats();
         recording = false;
-        //DumpAVLog();
-        //DumpEventLog();
+        DumpNormalizedValuesLog();
+        DumpAVLog();
+        DumpEventLog();
     }
 }

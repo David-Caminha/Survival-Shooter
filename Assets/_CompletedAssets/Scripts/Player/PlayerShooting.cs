@@ -5,6 +5,8 @@ namespace CompleteProject
 {
     public class PlayerShooting : MonoBehaviour
     {
+        public BoredomManager boredomManager;           // Script that manages the player's boredom
+
         public int damagePerShot = 20;                  // The damage inflicted by each bullet.
         public float timeBetweenBullets = 0.15f;        // The time between each shot.
         public float range = 100f;                      // The distance the gun can fire.
@@ -109,6 +111,8 @@ namespace CompleteProject
                 {
                     // ... the enemy should take damage.
                     enemyHealth.TakeDamage (damagePerShot, shootHit.point);
+                    if (boredomManager != null && enemyHealth.currentHealth <= 0)
+                        boredomManager.ResetTimer();
                 }
 
                 // Set the second position of the line renderer to the point the raycast hit.
