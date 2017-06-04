@@ -8,7 +8,7 @@ namespace CompleteProject
         public GameObject enemy;                // The enemy prefab to be spawned.
         public float spawnInterval = 3f;            // How long between each spawn.
         public Transform[] spawnPoints;         // An array of the spawn points this enemy can spawn from.
-        bool spawning = false;
+        public bool spawning = false;
 
         public float dropChance = 10;
 
@@ -46,6 +46,12 @@ namespace CompleteProject
             Invoke("Spawn", spawnInterval);
             spawning = true;
             Invoke("StopSpawning", spawnTime);
+        }
+
+        public void SpawnIndefinitely()
+        {
+            Invoke("Spawn", spawnInterval);
+            spawning = true;
         }
 
         public void StopSpawning()

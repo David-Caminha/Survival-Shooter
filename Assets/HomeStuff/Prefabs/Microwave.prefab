@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4000011298121576}
   - component: {fileID: 33000010423625498}
   - component: {fileID: 23000012261489402}
+  - component: {fileID: 65640212147458160}
   m_Layer: 0
   m_Name: Microwave
   m_TagString: Untagged
@@ -34,9 +35,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011328392264}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -5.62, y: 2.52, z: 10.35}
-  m_LocalScale: {x: 100, y: 100, z: 100}
+  m_LocalRotation: {x: -0, y: 0.92387956, z: -0, w: -0.38268343}
+  m_LocalPosition: {x: 0.6894283, y: 9.35, z: 30.458622}
+  m_LocalScale: {x: 400.00006, y: 400, z: 400.00006}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -79,3 +80,15 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011328392264}
   m_Mesh: {fileID: 4300000, guid: 8a62549e9cba08e4caf06a1a49de69d7, type: 3}
+--- !u!65 &65640212147458160
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011328392264}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.01577795, y: 0.009555855, z: 0.012695218}
+  m_Center: {x: 0.000000008382962, y: -0.0000000023283064, z: -0.00004966069}

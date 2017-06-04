@@ -82,8 +82,10 @@ public class EmotionManager : MonoBehaviour
 
     void OnGUI()
     {
-        GUI.Label(new Rect(10, Screen.height - 60, 80, 20), ArousalLevel.ToString());
-        GUI.Label(new Rect(10, Screen.height - 30, 80, 20), ValenceLevel.ToString());
+        GUI.Label(new Rect(10, Screen.height - 120, 200, 20), "Avg Arousal: " + AverageArousal().ToString());
+        GUI.Label(new Rect(10, Screen.height - 90, 200, 20), "Avg Valence: " + AverageValence().ToString());
+        GUI.Label(new Rect(10, Screen.height - 60, 140, 20), "Arousal: " + ArousalLevel.ToString());
+        GUI.Label(new Rect(10, Screen.height - 30, 140, 20), "Valence: " + ValenceLevel.ToString());
     }
 
     public double AverageArousal()

@@ -82,5 +82,6 @@ public class CinematicManager : MonoBehaviour
         overlay.SetActive (false);
 		mainListener.enabled = true;
 		Time.timeScale = 1f;
+        Destroy(gameObject);
 	}
 }

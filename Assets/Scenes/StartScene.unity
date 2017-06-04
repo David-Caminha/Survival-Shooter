@@ -1420,7 +1420,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerName: 
-  emotionalMechanics: 0
+  emotionalMechanics: 1
   tutorialTime: 0
   ArousalValue: 0
   ValenceValue: 0

@@ -21,7 +21,8 @@ GameObject:
   - component: {fileID: 4000011979747692}
   - component: {fileID: 33000011066242548}
   - component: {fileID: 23000012238046170}
-  m_Layer: 0
+  - component: {fileID: 135747323299313878}
+  m_Layer: 9
   m_Name: TallLamp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35,8 +36,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010754454028}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 18.24, y: 2.2, z: -17.34}
-  m_LocalScale: {x: 100, y: 100, z: 100}
+  m_LocalPosition: {x: -20.194973, y: 15.5, z: -49.157963}
+  m_LocalScale: {x: 500, y: 500, z: 500}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -79,3 +80,15 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010754454028}
   m_Mesh: {fileID: 4300000, guid: 16de22d71aac07c4e8827211e6a16176, type: 3}
+--- !u!135 &135747323299313878
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010754454028}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.0066915513
+  m_Center: {x: 0, y: -0.031, z: 0}
