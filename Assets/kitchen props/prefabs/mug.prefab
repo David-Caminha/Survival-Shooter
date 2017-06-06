@@ -22,12 +22,12 @@ GameObject:
   - component: {fileID: 33738411773419952}
   - component: {fileID: 23600093203794856}
   - component: {fileID: 136912974458503854}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: mug
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4262997670140510
 Transform:
@@ -35,13 +35,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1330301449065840}
-  m_LocalRotation: {x: -0, y: 0.38268343, z: -0, w: 0.92387956}
-  m_LocalPosition: {x: -32.848648, y: 7.977, z: 25.742222}
+  m_LocalRotation: {x: 0, y: 0.059741903, z: 0, w: 0.9982139}
+  m_LocalPosition: {x: -33.52, y: 7.977, z: 26.82}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 6.85, z: 0}
 --- !u!23 &23600093203794856
 MeshRenderer:
   m_ObjectHideFlags: 1

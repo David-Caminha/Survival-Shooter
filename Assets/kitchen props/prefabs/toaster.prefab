@@ -22,12 +22,12 @@ GameObject:
   - component: {fileID: 33686895875818090}
   - component: {fileID: 23665506309628944}
   - component: {fileID: 65378946048629728}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: toaster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4733600071841900
 Transform:

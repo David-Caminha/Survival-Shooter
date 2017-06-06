@@ -22,12 +22,12 @@ GameObject:
   - component: {fileID: 33460655867298962}
   - component: {fileID: 23080407569997140}
   - component: {fileID: 135935715972328638}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: plate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4983927277816958
 Transform:
@@ -36,7 +36,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1255247138875802}
   m_LocalRotation: {x: -0, y: 0.38268343, z: -0, w: 0.92387956}
-  m_LocalPosition: {x: -23.159119, y: 7.6, z: 26.76208}
+  m_LocalPosition: {x: -23.79414, y: 7.6, z: 31.50161}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children: []
   m_Father: {fileID: 0}

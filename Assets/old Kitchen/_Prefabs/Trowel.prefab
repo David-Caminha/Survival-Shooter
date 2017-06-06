@@ -19,7 +19,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4000010229562908}
-  m_Layer: 0
+  - component: {fileID: 135827444782455306}
+  m_Layer: 9
   m_Name: Trowel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +37,7 @@ GameObject:
   - component: {fileID: 4000011790147578}
   - component: {fileID: 33000013943573998}
   - component: {fileID: 23000010786504098}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49,14 +50,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010403598558}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.057253145, y: 0.5526123, z: 0.0856854, w: 0.82704276}
+  m_LocalPosition: {x: -33.50979, y: 9.53, z: -0.8555994}
+  m_LocalScale: {x: 7.5000033, y: 7.5000014, z: 7.500004}
   m_Children:
   - {fileID: 4000011790147578}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 22.5, z: 11.83}
 --- !u!4 &4000011790147578
 Transform:
   m_ObjectHideFlags: 1
@@ -108,3 +109,15 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000013483051012}
   m_Mesh: {fileID: 4300000, guid: 9d4a82dcb24c475458df2e3e169ea839, type: 3}
+--- !u!135 &135827444782455306
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010403598558}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.08629876
+  m_Center: {x: 0.074, y: -0.21, z: 0}

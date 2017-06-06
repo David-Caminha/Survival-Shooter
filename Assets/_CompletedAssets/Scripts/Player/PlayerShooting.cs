@@ -9,7 +9,7 @@ namespace CompleteProject
 
         public int damagePerShot = 20;                  // The damage inflicted by each bullet.
         public float timeBetweenBullets = 0.15f;        // The time between each shot.
-        public float range = 100f;                      // The distance the gun can fire.
+        public float range = 20f;                      // The distance the gun can fire.
 
 
         float timer;                                    // A timer to determine when to fire.
@@ -107,7 +107,7 @@ namespace CompleteProject
                 EnemyHealth enemyHealth = shootHit.collider.GetComponent <EnemyHealth> ();
 
                 // If the EnemyHealth component exist...
-                if(enemyHealth != null)
+                if(enemyHealth != null && shootHit.transform.CompareTag("Enemy"))
                 {
                     // ... the enemy should take damage.
                     enemyHealth.TakeDamage (damagePerShot, shootHit.point);

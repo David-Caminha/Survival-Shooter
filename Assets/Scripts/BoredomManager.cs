@@ -39,10 +39,6 @@ public class BoredomManager : MonoBehaviour
             if (emotionManager)
                 emotionMult = GetEmotionMult();
             float rand = UnityEngine.Random.Range(0f, 1f);
-            Debug.Log("spawnProb: " + spawnProb);
-            Debug.Log("timeMult: " + timeMult);
-            Debug.Log("emotionMult: " + emotionMult);
-            Debug.Log("rand: " + rand + "   spawnProb: " + spawnProb * timeMult * emotionMult);
             if (rand <= spawnProb * timeMult * emotionMult)
             {
                 SpawnEnemies();
