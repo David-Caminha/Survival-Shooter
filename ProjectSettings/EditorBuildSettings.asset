@@ -11,3 +11,9 @@ EditorBuildSettings:
     path: Assets/_CompletedAssets/Scenes/Complete-Game.unity
   - enabled: 1
     path: Assets/Scenes/MainHall.unity
+  - enabled: 1
+    path: Assets/Scenes/Kitchen.unity
+  - enabled: 1
+    path: Assets/Scenes/LivingRoom.unity
+  - enabled: 1
+    path: Assets/Scenes/BossRoom.unity

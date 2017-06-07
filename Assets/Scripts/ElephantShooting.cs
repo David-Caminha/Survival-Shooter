@@ -12,7 +12,7 @@ public class ElephantShooting : MonoBehaviour
     public Transform shotOrigin;
     public int countsBetweenShots = 3;
 
-    void Awake()
+    void Start()
     {
         counter = 0;
         player = GameObject.FindGameObjectWithTag("Player");

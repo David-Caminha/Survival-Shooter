@@ -13,11 +13,12 @@ public class BunnyBearShooting : MonoBehaviour {
     public Transform shotOrigin;
     public int countsBetweenShots = 3;
 
-    void Awake()
+    void Start()
     {
         counter = 3;
         player = GameObject.FindGameObjectWithTag("Player");
         bulletManager = BulletManager.Instance;
+        Debug.Log(bulletManager);
     }
 
     void Shoot()

@@ -40,17 +40,6 @@ namespace CompleteProject
         }
 
 
-        void Update ()
-        {
-            // If the enemy should be sinking...
-            if(isSinking)
-            {
-                // ... move the enemy down by the sinkSpeed per second.
-                transform.Translate (-Vector3.up * sinkSpeed * Time.deltaTime);
-            }
-        }
-
-
         public void TakeDamage (int amount, Vector3 hitPoint)
         {
             // If the enemy is dead...

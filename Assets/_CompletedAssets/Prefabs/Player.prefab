@@ -432,9 +432,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c83720df9acb89488dbf2c0dbd3ad78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  boredomManager: {fileID: 0}
   damagePerShot: 20
   timeBetweenBullets: 0.12
-  range: 100
+  range: 20
   faceLight: {fileID: 10800002}
 --- !u!114 &11400002
 MonoBehaviour:
@@ -459,6 +460,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c32067ea884548644b13cf9baddd4573, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 100
   startingHealth: 100
   currentHealth: 0
   healthSlider: {fileID: 0}
