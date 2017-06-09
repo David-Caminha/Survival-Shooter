@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: ZombunnyMaterial
-  m_Shader: {fileID: 45, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 6, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: _EMISSION _EMISSIONMAP _LIGHTMAPPING_DYNAMIC_LIGHTMAPS _LIGHTMAPPING_REALTIME
     _NORMALMAP _SPECGLOSSMAP _UVSEC_UV1
   m_LightmapFlags: 1
@@ -141,6 +141,9 @@ Material:
     - first:
         name: _Color
       second: {r: 1, g: 1, b: 1, a: 1}
+    - first:
+        name: _Emission
+      second: {r: 0.17647058, g: 0.17647058, b: 0.17647058, a: 0}
     - first:
         name: _EmissionColor
       second: {r: 0.6, g: 0.6, b: 0.6, a: 0.6}

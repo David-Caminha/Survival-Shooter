@@ -95,7 +95,7 @@ namespace CompleteProject
             float rand = Random.Range(0f, 100f);
             if(rand < dropChance)
             {
-                Vector3 pickupPosition = new Vector3(transform.position.x, 0.3f, transform.position.z);
+                Vector3 pickupPosition = new Vector3(transform.position.x, transform.position.y + 0.3f, transform.position.z);
                 Instantiate(healthDrop, pickupPosition, Quaternion.identity);
             }
         }

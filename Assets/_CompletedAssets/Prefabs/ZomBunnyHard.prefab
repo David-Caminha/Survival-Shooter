@@ -178,7 +178,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1971707183803018}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -31.539833, y: 14.87, z: 21.529242}
+  m_LocalPosition: {x: 15.760615, y: -0.0000023470743, z: -58.68869}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4958436708770004}
@@ -324,8 +324,8 @@ Light:
   serializedVersion: 7
   m_Type: 2
   m_Color: {r: 0, g: 1, b: 0.91724133, a: 1}
-  m_Intensity: 1
-  m_Range: 2.97
+  m_Intensity: 2
+  m_Range: 1
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -415,7 +415,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shoots: 1
   isBear: 0
-  shotPrefab: {fileID: 1632791170364334, guid: e1c7b3b3f3d9d9a48a6dc6356977ffc6, type: 2}
   shotOrigin: {fileID: 4245055595944596}
   countsBetweenShots: 3
 --- !u!135 &135555429509073112
@@ -3163,7 +3162,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: -2060726257
+  randomSeed: -1666355924
   InitialModule:
     serializedVersion: 3
     enabled: 1

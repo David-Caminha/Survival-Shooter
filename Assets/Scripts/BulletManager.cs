@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BulletManager : MonoBehaviour
 {
-    List<GameObject> freeShots;
+    public List<GameObject> freeShots;
     List<GameObject> onSceneShots;
 
     public GameObject shotPrefab;
@@ -21,6 +21,16 @@ public class BulletManager : MonoBehaviour
         instance = this;
         freeShots = new List<GameObject>();
         onSceneShots = new List<GameObject>();
+    }
+
+    void Start()
+    {
+        ShotMovement[] children = GetComponentsInChildren<ShotMovement>();
+        for(int i = 0; i < children.Length; i++)
+        {
+            freeShots.Add(children[i].gameObject);
+            children[i].gameObject.SetActive(false);
+        }
     }
 
     public void Shoot(Vector3 position, Quaternion rotation)

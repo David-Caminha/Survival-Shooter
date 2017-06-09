@@ -18,7 +18,6 @@ public class BunnyBearShooting : MonoBehaviour {
         counter = 3;
         player = GameObject.FindGameObjectWithTag("Player");
         bulletManager = BulletManager.Instance;
-        Debug.Log(bulletManager);
     }
 
     void Shoot()
@@ -37,14 +36,14 @@ public class BunnyBearShooting : MonoBehaviour {
     public void TakeShot()
     {
         shotOrigin.LookAt(player.transform);
-        shotOrigin.rotation = Quaternion.Euler(0, shotOrigin.transform.rotation.eulerAngles.y, 0);
+        shotOrigin.rotation = Quaternion.Euler(0, shotOrigin.rotation.eulerAngles.y, 0);
         bulletManager.Shoot(shotOrigin.position, shotOrigin.rotation);
         if (isBear)
         {
-            shotOrigin.transform.rotation = Quaternion.Euler(0, shotOrigin.transform.rotation.eulerAngles.y + 15, 0);
+            shotOrigin.transform.rotation = Quaternion.Euler(0, shotOrigin.rotation.eulerAngles.y + 15, 0);
             bulletManager.Shoot(shotOrigin.position, shotOrigin.rotation);
 
-            shotOrigin.transform.rotation = Quaternion.Euler(0, shotOrigin.transform.rotation.eulerAngles.y - 30, 0);
+            shotOrigin.transform.rotation = Quaternion.Euler(0, shotOrigin.rotation.eulerAngles.y - 30, 0);
             bulletManager.Shoot(shotOrigin.position, shotOrigin.rotation);
         }
     }

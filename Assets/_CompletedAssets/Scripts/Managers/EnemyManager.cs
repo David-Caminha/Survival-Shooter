@@ -13,11 +13,6 @@ namespace CompleteProject
         public float dropChance = 10;
 
 
-        void Start ()
-        {
-        }
-
-
         void Spawn ()
         {
             if(spawning)

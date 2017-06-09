@@ -39,6 +39,7 @@ namespace CompleteProject
 
             // Set the initial health of the player.
             currentHealth = startingHealth;
+            healthSlider.value = currentHealth;
         }
 
 

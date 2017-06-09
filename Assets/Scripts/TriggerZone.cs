@@ -19,24 +19,24 @@ public class TriggerZone : MonoBehaviour {
         {
             if (emotionManager.tutorialTime > 60)
             {
-                spawnTime = 14f;
+                spawnTime = 6f;
             }
             else if (emotionManager.tutorialTime > 40)
             {
-                spawnTime = 17f;
+                spawnTime = 8f;
             }
             else if (emotionManager.tutorialTime > 30)
             {
-                spawnTime = 17f;
+                spawnTime = 10f;
             }
             else
             {
-                spawnTime = 15f;
+                spawnTime = 12f;
             }
         }
         else
         {
-            spawnTime = 17f;
+            spawnTime = 10f;
         }
     }
 	
@@ -53,6 +53,7 @@ public class TriggerZone : MonoBehaviour {
                     spawners[j].StartSpawning(spawnTime * spawnTimeMult);
                 }
             }
+            gameObject.SetActive(false);
         }
     }
 }

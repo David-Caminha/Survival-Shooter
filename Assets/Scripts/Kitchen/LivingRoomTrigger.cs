@@ -11,7 +11,12 @@ public class LivingRoomTrigger : MonoBehaviour {
 		if(other.gameObject.CompareTag("Player"))
         {
             message.SetActive(true);
-            SceneManager.LoadSceneAsync(4);
+            Invoke("MoveToLivingRoom", 20f);
         }
 	}
+
+    void MoveToLivingRoom()
+    {
+        SceneManager.LoadSceneAsync(4);
+    }
 }
