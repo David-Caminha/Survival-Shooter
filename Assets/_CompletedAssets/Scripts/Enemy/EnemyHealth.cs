@@ -7,7 +7,7 @@ namespace CompleteProject
         EmotionManager emotionManager;
 
         public GameObject healthDrop;
-        public GameObject ammoDrop;
+        public GameObject boostDrop;
         public float dropChance = 10f;
 
         public int startingHealth = 100;            // The amount of health the enemy starts the game with.
@@ -92,12 +92,80 @@ namespace CompleteProject
 
         void DropItem()
         {
+            float emotionMult = GetEmotionMult();
             float rand = Random.Range(0f, 100f);
-            if(rand < dropChance)
+            if(rand < dropChance * emotionMult)
             {
-                Vector3 pickupPosition = new Vector3(transform.position.x, transform.position.y + 0.3f, transform.position.z);
-                Instantiate(healthDrop, pickupPosition, Quaternion.identity);
+                float item = Random.Range(0f, 100f);
+                if(item < 20)
+                {
+                    Vector3 pickupPosition = new Vector3(transform.position.x, transform.position.y + 0.3f, transform.position.z);
+                    Instantiate(boostDrop, pickupPosition, Quaternion.identity);
+                    if (emotionManager)
+                        emotionManager.AddEvent("Drop boost pack");
+                }
+                else
+                {
+                    Vector3 pickupPosition = new Vector3(transform.position.x, transform.position.y + 0.3f, transform.position.z);
+                    Instantiate(healthDrop, pickupPosition, Quaternion.identity);
+                    if (emotionManager)
+                        emotionManager.AddEvent("Drop health pack");
+                }
             }
+        }
+
+        float GetEmotionMult()
+        {
+            float emotionMult = 1f;
+
+            if (emotionManager && emotionManager.emotionalMechanics)
+            {
+                double avgArousal = emotionManager.AverageArousal();
+                double avgValence = emotionManager.AverageValence();
+
+                if (avgArousal >= 3)
+                {
+                    if (avgValence >= 3)
+                        emotionMult = 1;
+                    else if (avgValence >= 2)
+                        emotionMult = 1;
+                    else if (avgValence >= 1)
+                        emotionMult = 3;
+                    else
+                        emotionMult = 5;
+                }
+                else if (avgArousal >= 2)
+                {
+                    if (avgValence >= 3)
+                        emotionMult = 1;
+                    else if (avgValence >= 2)
+                        emotionMult = 1;
+                    else if (avgValence >= 1)
+                        emotionMult = 2;
+                    else
+                        emotionMult = 3;
+                }
+                else if (avgArousal >= 1)
+                {
+                    if (avgValence >= 3)
+                        emotionMult = 0.75f;
+                    else if (avgValence >= 2)
+                        emotionMult = 0.5f;
+                    else if (avgValence >= 1)
+                        emotionMult = 0.4f;
+                    else
+                        emotionMult = 0.2f;
+                }
+                else
+                {
+                    if (avgValence >= 2)
+                        emotionMult = 0.6f;
+                    else
+                        emotionMult = 0.2f;
+                }
+            }
+
+            return emotionMult;
         }
 
 

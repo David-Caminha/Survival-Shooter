@@ -68,6 +68,6 @@ public class TutorialManager : MonoBehaviour {
     void NextLevel()
     {
         EmotionManager.Instance.tutorialTime = time;
-        SceneManager.LoadScene(2);
+        SceneManager.LoadSceneAsync(2);
     }
 }

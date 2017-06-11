@@ -6,10 +6,9 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: LineRenderMaterial
-  m_Shader: {fileID: 10755, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: _EMISSION _EMISSIONMAP _LIGHTMAPPING_DYNAMIC_LIGHTMAPS _LIGHTMAPPING_REALTIME
-    _UVSEC_UV1
+  m_Name: Damage Pickup Material
+  m_Shader: {fileID: 45, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: _EMISSION _NORMALMAP _SPECGLOSSMAP
   m_LightmapFlags: 1
   m_CustomRenderQueue: -1
   stringTagMap: {}
@@ -19,7 +18,7 @@ Material:
     - first:
         name: _BumpMap
       second:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: c3f40485af35342648392ad803361ce8, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
@@ -43,29 +42,17 @@ Material:
     - first:
         name: _EmissionMap
       second:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - first:
-        name: _Illum
-      second:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: fd7d5dbdd775c4b54942dbd3875271a5, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
         name: _MainTex
       second:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: cd01d1b5659de4e37b966c9e953b7cd4, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
         name: _MetallicGlossMap
-      second:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - first:
-        name: _Occlusion
       second:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -85,13 +72,10 @@ Material:
     - first:
         name: _SpecGlossMap
       second:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 8ac1af5ccc0ee45e792cb05c589655a4, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - first:
-        name: _AlphaTestRef
-      second: 0.5
     - first:
         name: _BumpScale
       second: 1
@@ -105,19 +89,13 @@ Material:
         name: _DstBlend
       second: 0
     - first:
-        name: _DynamicEmissionLM
-      second: 0
-    - first:
-        name: _EmissionLM
-      second: 1
-    - first:
-        name: _EmissionScaleUI
+        name: _GlossMapScale
       second: 1
     - first:
         name: _Glossiness
-      second: 0
+      second: 0.5
     - first:
-        name: _Lightmapping
+        name: _GlossyReflections
       second: 1
     - first:
         name: _Metallic
@@ -132,6 +110,12 @@ Material:
         name: _Parallax
       second: 0.02
     - first:
+        name: _SmoothnessTextureChannel
+      second: 0
+    - first:
+        name: _SpecularHighlights
+      second: 1
+    - first:
         name: _SrcBlend
       second: 1
     - first:
@@ -143,19 +127,10 @@ Material:
     m_Colors:
     - first:
         name: _Color
-      second: {r: 1, g: 0.90882397, b: 0.641, a: 1}
-    - first:
-        name: _EmissionColor
-      second: {r: 0.97058815, g: 0.88071525, b: 0.37824392, a: 0.99999994}
-    - first:
-        name: _EmissionColorUI
-      second: {r: 0.9705882, g: 0.8807153, b: 0.37824395, a: 1}
-    - first:
-        name: _EmissionColorWithMapUI
       second: {r: 1, g: 1, b: 1, a: 1}
     - first:
-        name: _SpecColor
-      second: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+        name: _EmissionColor
+      second: {r: 0.44117647, g: 0.22819474, b: 0, a: 1}
     - first:
-        name: _SpecularColor
-      second: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+        name: _SpecColor
+      second: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}

@@ -397,8 +397,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthDrop: {fileID: 1816689732081286, guid: c0b5040445f685b44898449abbc713a7, type: 2}
-  ammoDrop: {fileID: 0}
-  dropChance: 10
+  boostDrop: {fileID: 1292798210047148, guid: aa1e122b09fbbe34684544fc5b336a49, type: 2}
+  dropChance: 12.5
   startingHealth: 100
   currentHealth: 0
   sinkSpeed: 2.5

@@ -35,9 +35,7 @@ public class BoredomManager : MonoBehaviour
         if (timeSinceLastEvent > 10f)
         {
             float timeMult = timeSinceLastEvent / 45f + 1f / 6f;
-            float emotionMult = 1f;
-            if (emotionManager)
-                emotionMult = GetEmotionMult();
+            float emotionMult = GetEmotionMult();
             float rand = UnityEngine.Random.Range(0f, 1f);
             if (rand <= spawnProb * timeMult * emotionMult)
             {
@@ -73,29 +71,40 @@ public class BoredomManager : MonoBehaviour
     {
         float emotionMult = 1f;
 
-        if (emotionManager.emotionalMechanics)
+        if (emotionManager && emotionManager.emotionalMechanics)
         {
             double avgArousal = emotionManager.AverageArousal();
             double avgValence = emotionManager.AverageValence();
-
+            
             if (avgArousal >= 2.5)
                 emotionMult = 0.2f;
-            else if (avgArousal >= 2 && avgValence >= 2.5)
-                emotionMult = 0.3f;
-            else if (avgArousal >= 2 && avgValence <= 1.5)
-                emotionMult = 0.3f;
-            else if (avgArousal >= 1 && avgValence >= 2.5)
-                emotionMult = 0.8f;
-            else if (avgArousal >= 1 && avgValence <= 1.5)
-                emotionMult = 1f;
-            else if (avgArousal >= 1.8)
-                emotionMult = 0.6f;
+            else if (avgArousal >= 2)
+            {
+                if (avgValence >= 2.5)
+                    emotionMult = 0.3f;
+                else if (avgValence >= 1.5)
+                    emotionMult = 0.6f;
+                else
+                    emotionMult = 0.3f;
+            }
             else if (avgArousal >= 1)
-                emotionMult = 1.2f;
-            else if (avgArousal >= 0 && avgValence <= 2.5)
-                emotionMult = 1.5f;
-            else if (avgArousal >= 0 && avgValence >= 2.5)
-                emotionMult = 1.35f;
+            {
+                if (avgValence >= 2.5)
+                    emotionMult = 0.8f;
+                else if (avgValence >= 1.5)
+                    emotionMult = 1f;
+                else
+                    emotionMult = 2.5f;
+            }
+            else
+            {
+                if (avgValence >= 2.5)
+                    emotionMult = 1f;
+                else if (avgValence >= 1.5)
+                    emotionMult = 1.5f;
+                else
+                    emotionMult = 3f;
+            }
         }
 
         return emotionMult;

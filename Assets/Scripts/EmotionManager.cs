@@ -10,6 +10,9 @@ public class EmotionManager : MonoBehaviour
     public bool emotionalMechanics = false;
     public float tutorialTime;
 
+    public bool holdingBreath = false;
+    bool invoked = false;
+
     public double ArousalValue;
     public double ValenceValue;
 
@@ -67,8 +70,8 @@ public class EmotionManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        highestVal = new List<double> { Double.MinValue, Double.MinValue, Double.MinValue, Double.MinValue, Double.MinValue, Double.MinValue}; // #[SC_h, HR_h, EMG1_h, EMG2_h]
-        lowestVal = new List<double> { Double.MaxValue, Double.MaxValue, Double.MaxValue, Double.MaxValue, Double.MaxValue, Double.MaxValue}; // #[SC_l, HR_l, EMG1_l, EMG2_l]
+        highestVal = new List<double> { Double.MinValue, Double.MinValue, Double.MinValue, Double.MinValue, Double.MinValue, Double.MinValue, Double.MinValue }; // #[SC_h, HR_h, EMG1_h, EMG2_h]
+        lowestVal = new List<double> { Double.MaxValue, Double.MaxValue, Double.MaxValue, Double.MaxValue, Double.MaxValue, Double.MaxValue, Double.MaxValue }; // #[SC_l, HR_l, EMG1_l, EMG2_l]
         recording = true;
         LoadPlayerStats();
         StartCoroutine(BioSensorDataPool());
@@ -90,6 +93,8 @@ public class EmotionManager : MonoBehaviour
 
     public double AverageArousal()
     {
+        if (classified_data.Count < 10)
+            return 0;
         double avg = 0;
         for (int i = classified_data.Count - 1; i >= classified_data.Count - 10; i--)
         {
@@ -101,6 +106,8 @@ public class EmotionManager : MonoBehaviour
 
     public double AverageValence()
     {
+        if (classified_data.Count < 10)
+            return 0;
         double avg = 0;
         for (int i = classified_data.Count - 1; i >= classified_data.Count - 10; i--)
         {
@@ -125,6 +132,7 @@ public class EmotionManager : MonoBehaviour
         double bs_EMG1_100_amp = -1;
         double bs_EMG2_100_amp = -1;
         double bs_HR = -1;
+        double bs_RSP = -1;
 
         double prevHR = -1;
 
@@ -139,17 +147,16 @@ public class EmotionManager : MonoBehaviour
             bs_br.ReadDouble();
             bs_br.ReadDouble();
             bs_GSR = bs_br.ReadDouble();
-            for (int m = 0; m < 5; m++)
-            {
-                bs_br.ReadDouble();
-            }
+            bs_br.ReadDouble();
+            bs_br.ReadDouble();
+            bs_RSP = bs_br.ReadDouble();
+            bs_br.ReadDouble();
+            bs_br.ReadDouble();
             bs_br.ReadDouble();
             bs_br.ReadDouble();
             bs_EMG1_20_amp = bs_br.ReadDouble();
             bs_EMG1_100_amp = bs_br.ReadDouble();
-
             bs_br.ReadDouble();
-
             bs_br.ReadDouble();
             bs_br.ReadDouble();
             bs_EMG2_20_amp = bs_br.ReadDouble();
@@ -160,6 +167,8 @@ public class EmotionManager : MonoBehaviour
             bs_HR = bs_br.ReadDouble();
 
             bs_fs.Position = 0;
+
+            Debug.Log("rsp " + bs_RSP);
 
             //Pre-process Data:
             //Filter HR:
@@ -174,25 +183,19 @@ public class EmotionManager : MonoBehaviour
                 else prevHR = bs_HR;
             }
 
-            raw_data.Add(new List<double> { sw.ElapsedMilliseconds / 1000.00, bs_GSR, bs_HR, bs_EMG1_20_amp, bs_EMG1_100_amp, bs_EMG2_20_amp, bs_EMG2_100_amp });
-            smoothed_data.Add(new List<double> { sw.ElapsedMilliseconds / 1000.00, bs_GSR, bs_HR, bs_EMG1_20_amp, bs_EMG1_100_amp, bs_EMG2_20_amp, bs_EMG2_100_amp });
+            raw_data.Add(new List<double> { sw.ElapsedMilliseconds / 1000.00, bs_GSR, bs_HR, bs_EMG1_20_amp, bs_EMG1_100_amp, bs_EMG2_20_amp, bs_EMG2_100_amp, bs_RSP });
+            smoothed_data.Add(new List<double> { sw.ElapsedMilliseconds / 1000.00, bs_GSR, bs_HR, bs_EMG1_20_amp, bs_EMG1_100_amp, bs_EMG2_20_amp, bs_EMG2_100_amp, bs_RSP });
 
-            Debug.Log("time: " + String.Format("{0:f}", sw.ElapsedMilliseconds / 1000f) + "\tHR: " + bs_HR + "\tGSR: " + bs_GSR + "\tEMG1_20_amp: " + bs_EMG1_20_amp + "\tEMG1_100_amp: " + bs_EMG1_100_amp + "\tEMG2_20_amp: " + bs_EMG2_20_amp + "\tEMG2_100_amp: " + bs_EMG2_100_amp);
+            Debug.Log("time: " + String.Format("{0:f}", sw.ElapsedMilliseconds / 1000f) + "\tHR: " + bs_HR + "\tGSR: " + bs_GSR + "\tEMG1_20_amp: " + bs_EMG1_20_amp + "\tEMG1_100_amp: " + bs_EMG1_100_amp + "\tEMG2_20_amp: " + bs_EMG2_20_amp + "\tEMG2_100_amp: " + bs_EMG2_100_amp + "\tRSP: " + bs_RSP);
 
-            for(int i = 0; i < 6; i++)
+            for(int i = 0; i < 7; i++)
             {
-                Debug.Log(i);
-                Debug.Log(smoothed_data[raw_data.Count - 1][i + 1]);
-                Debug.Log(lowestVal[i]);
-                Debug.Log(highestVal[i]);
                 if (smoothed_data[raw_data.Count - 1][i + 1] < lowestVal[i])
                     lowestVal[i] = smoothed_data[raw_data.Count - 1][i + 1];
 
                 if (smoothed_data[raw_data.Count - 1][i + 1] > highestVal[i])
                     highestVal[i] = smoothed_data[raw_data.Count - 1][i + 1];
             }
-
-            Debug.Log("after for");
 
             ////Smooth GSR:
             //if (raw_data.Count - 1 >= SCSmoothingWindowSize && raw_data.Count - 1 < (raw_data.Count - SCSmoothingWindowSize)) //Start @ a point in the data where enough data has been collected
@@ -254,7 +257,7 @@ public class EmotionManager : MonoBehaviour
 
 
             // Normalize values
-            normalized_data.Add(new List<double> { smoothed_data[raw_data.Count - 1][0], 0, 0, 0, 0, 0, 0 });
+            normalized_data.Add(new List<double> { smoothed_data[raw_data.Count - 1][0], 0, 0, 0, 0, 0, 0, 0 });
 
             // GSR
             double GSR_n = (smoothed_data[raw_data.Count - 1][1] - lowestVal[0]) / (highestVal[0] - lowestVal[0]) * 100;
@@ -280,13 +283,27 @@ public class EmotionManager : MonoBehaviour
             double EMG2_100_amp_n = (smoothed_data[raw_data.Count - 1][6] - lowestVal[5]) / (highestVal[5] - lowestVal[5]) * 100;
             normalized_data[raw_data.Count - 1][6] = EMG2_100_amp_n;
 
-            Debug.Log("Normalized time: " + String.Format("{0:f}", sw.ElapsedMilliseconds / 1000f) + "\tHR: " + normalized_data[raw_data.Count - 1][2] + "\tGSR: " + normalized_data[raw_data.Count - 1][1] + "\tEMG1_20_amp: " + normalized_data[raw_data.Count - 1][3] + "\tEMG1_100_amp: " + normalized_data[raw_data.Count - 1][4] + "\tEMG2_20_amp: " + normalized_data[raw_data.Count - 1][5] + "\tEMG2_100_amp: " + normalized_data[raw_data.Count - 1][6]);
+            // RSP
+            double RSP = (smoothed_data[raw_data.Count - 1][7] - lowestVal[6]) / (highestVal[6] - lowestVal[6]) * 100;
+            normalized_data[raw_data.Count - 1][7] = EMG2_100_amp_n;
+
+            Debug.Log("Normalized time: " + String.Format("{0:f}", sw.ElapsedMilliseconds / 1000f) + "\tHR: " + normalized_data[raw_data.Count - 1][2] + "\tGSR: " + normalized_data[raw_data.Count - 1][1] + "\tEMG1_20_amp: " + normalized_data[raw_data.Count - 1][3] + "\tEMG1_100_amp: " + normalized_data[raw_data.Count - 1][4] + "\tEMG2_20_amp: " + normalized_data[raw_data.Count - 1][5] + "\tEMG2_100_amp: " + normalized_data[raw_data.Count - 1][6] + "\tRSP: " + normalized_data[raw_data.Count - 1][7]);
 
 
             ESLevel HR_level;
             ESLevel GSR_level;
             ESLevel EMG1_level; //Smiling
             ESLevel EMG2_level; //Frowning
+
+            if (normalized_data[raw_data.Count - 1][7] > 90 && !invoked)
+            {
+                Invoke("HoldingBreath", 0.8f);
+            }
+            else
+            {
+                holdingBreath = false;
+                invoked = false;
+            }
 
             if (normalized_data[raw_data.Count - 1][2] < 30)
                 HR_level = ESLevel.Low;
@@ -370,6 +387,11 @@ public class EmotionManager : MonoBehaviour
 
             yield return new WaitForSecondsRealtime(0.05f);
         }
+    }
+
+    public void HoldingBreath()
+    {
+        holdingBreath = true;
     }
 
     public void AddEvent(string e)

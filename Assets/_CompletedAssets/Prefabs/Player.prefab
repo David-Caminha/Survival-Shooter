@@ -67,6 +67,7 @@ GameObject:
   - component: {fileID: 11400002}
   - component: {fileID: 13600000}
   - component: {fileID: 8200002}
+  - component: {fileID: 114831975018369630}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -136,8 +137,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100006}
-  m_LocalRotation: {x: 0, y: 0.32441276, z: 0, w: 0.94591564}
-  m_LocalPosition: {x: -6.78, y: 0, z: -53.01}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -42, y: 0, z: -48.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400000}
@@ -347,7 +348,7 @@ Animator:
   m_Avatar: {fileID: 9000000, guid: f1d84cc28597f5641a3d9cbc4df7e306, type: 3}
   m_Controller: {fileID: 9100000, guid: 8360fd2187b2ccf4e910cb292f55710e, type: 2}
   m_CullingMode: 1
-  m_UpdateMode: 0
+  m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
@@ -434,6 +435,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boredomManager: {fileID: 0}
   damagePerShot: 20
+  extraDamange: 0
   timeBetweenBullets: 0.12
   range: 20
   faceLight: {fileID: 10800002}
@@ -461,7 +463,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  startingHealth: 100
+  startingHealth: 25
   currentHealth: 0
   healthSlider: {fileID: 0}
   damageImage: {fileID: 0}
@@ -3376,3 +3378,18 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100006}
   m_IsPrefabParent: 1
+--- !u!114 &114831975018369630
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29faa905d5c53674e8e44944c86d72c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxEnergy: 4
+  startingEnergy: 4
+  energySlider: {fileID: 0}
+  currentEnergy: 0

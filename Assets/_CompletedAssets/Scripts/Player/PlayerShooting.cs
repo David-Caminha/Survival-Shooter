@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnitySampleAssets.CrossPlatformInput;
 
 namespace CompleteProject
@@ -8,9 +9,9 @@ namespace CompleteProject
         public BoredomManager boredomManager;           // Script that manages the player's boredom
 
         public int damagePerShot = 20;                  // The damage inflicted by each bullet.
+        public int extraDamange = 0;
         public float timeBetweenBullets = 0.15f;        // The time between each shot.
-        public float range = 20f;                      // The distance the gun can fire.
-
+        public float range = 20f;                       // The distance the gun can fire.
 
         float timer;                                    // A timer to determine when to fire.
         Ray shootRay = new Ray();                       // A ray from the gun end forwards.
@@ -36,8 +37,7 @@ namespace CompleteProject
             gunLight = GetComponent<Light> ();
 			//faceLight = GetComponentInChildren<Light> ();
         }
-
-
+        
         void Update ()
         {
             // Add the time since Update was last called to the timer.
@@ -66,6 +66,19 @@ namespace CompleteProject
             }
         }
 
+        public void DamageAmp(int damageIncrease, float buffTime)
+        {
+            CancelInvoke("EndDamageAmp");
+            extraDamange = damageIncrease;
+            gunLine.material.color = new Color(1, 0.7f, 0);
+            Invoke("EndDamageAmp", buffTime);
+        }
+
+        public void EndDamageAmp()
+        {
+            extraDamange = 0;
+            gunLine.material.color = new Color(1, 0.9f, 0.639f);
+        }
 
         public void DisableEffects ()
         {
@@ -110,7 +123,7 @@ namespace CompleteProject
                 if(enemyHealth != null && shootHit.transform.CompareTag("Enemy"))
                 {
                     // ... the enemy should take damage.
-                    enemyHealth.TakeDamage (damagePerShot, shootHit.point);
+                    enemyHealth.TakeDamage (damagePerShot + extraDamange, shootHit.point);
                     if (boredomManager != null && enemyHealth.currentHealth <= 0)
                         boredomManager.ResetTimer();
                 }

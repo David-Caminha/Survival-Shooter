@@ -3,10 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealthPickup : MonoBehaviour
-{
-    public int healthAmount = 5;
+public class DamagePickup : MonoBehaviour {
+
+    public int damageIncrease = 30;
     public float rotationSpeed = 70;
+    public float buffTime = 7.5f;
     Vector3 initialPosition;
     float timer = 0;
 
@@ -14,12 +15,9 @@ public class HealthPickup : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
-            if (playerHealth.currentHealth < playerHealth.maxHealth)
-            {
-                playerHealth.Heal(healthAmount);
-                Destroy(gameObject);
-            }
+            PlayerShooting playerShooting = other.GetComponentInChildren<PlayerShooting>();
+            playerShooting.DamageAmp(damageIncrease, buffTime);
+            Destroy(gameObject);
         }
     }
 
