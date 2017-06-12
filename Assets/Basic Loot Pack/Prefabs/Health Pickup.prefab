@@ -23,6 +23,8 @@ GameObject:
   - component: {fileID: 23879024910752190}
   - component: {fileID: 65849972645599738}
   - component: {fileID: 114737486888901566}
+  - component: {fileID: 114421647872831404}
+  - component: {fileID: 54323317577509770}
   m_Layer: 0
   m_Name: Health Pickup
   m_TagString: Untagged
@@ -81,6 +83,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1816689732081286}
   m_Mesh: {fileID: 4300020, guid: a68ef7cfb5fcf4261818b4614aa2d937, type: 3}
+--- !u!54 &54323317577509770
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1816689732081286}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: Infinity
+  m_AngularDrag: Infinity
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 80
+  m_CollisionDetection: 0
 --- !u!65 &65849972645599738
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -93,6 +110,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2, y: 2, z: 2}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114421647872831404
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1816689732081286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2009f55fbd64ca44b888d5eabcde2eae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 12
+  player: {fileID: 0}
+  playerHealth: {fileID: 0}
+  moving: 0
 --- !u!114 &114737486888901566
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -104,5 +136,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd1c716aa633f1748b010e1fd8eec43e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthAmount: 5
+  healthAmount: 15
   rotationSpeed: 70
+  itemMagnet: {fileID: 114421647872831404}

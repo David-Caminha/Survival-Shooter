@@ -32,23 +32,29 @@ public class BulletTime : MonoBehaviour
             case 0:
                 if (emotionManager.holdingBreath && currentEnergy > 0)
                 {
-                    Time.timeScale = 0.4f;
+                    Time.timeScale = 0.5f;
                     regen = false;
                     CancelInvoke();
                     state = 1;
                 }
                 else if (regen && currentEnergy < maxEnergy)
                 {
-                    if (emotionManager.AverageArousal() > 3 && emotionManager.AverageValence() < 2)
+                    if (emotionManager.emotionalMechanics && emotionManager.AverageArousal() > 3 && emotionManager.AverageValence() < 2)
                         currentEnergy += Time.unscaledDeltaTime;
+                    else if (emotionManager.emotionalMechanics && emotionManager.AverageArousal() > 2 && emotionManager.AverageValence() < 2)
+                        currentEnergy += Time.unscaledDeltaTime * 0.5f;
+                    else if (emotionManager.emotionalMechanics && emotionManager.AverageValence() > 2)
+                        currentEnergy += Time.unscaledDeltaTime * 0.2f;
+                    else
+                        currentEnergy += Time.unscaledDeltaTime * 0.2f;
                 }
                 break;
             case 1:
                 currentEnergy -= Time.unscaledDeltaTime;
-                if (emotionManager.holdingBreath || currentEnergy <= 0)
+                if (!emotionManager.holdingBreath || currentEnergy <= 0)
                 {
                     Time.timeScale = 1;
-                    Invoke("Regen", 2.5f);
+                    Invoke("Regen", 4f);
                     state = 0;
                 }
                 break;

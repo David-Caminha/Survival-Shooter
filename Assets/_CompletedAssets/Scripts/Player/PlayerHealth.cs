@@ -9,6 +9,7 @@ namespace CompleteProject
     {
         EmotionManager emotionManager;
 
+        public bool inTutorial = false;
         public int maxHealth = 100;
         public int startingHealth = 100;                            // The amount of health the player starts the game with.
         public int currentHealth;                                   // The current health the player has.
@@ -20,10 +21,12 @@ namespace CompleteProject
 
 
         Animator anim;                                              // Reference to the Animator component.
+        public Animator canvasAnim;
+        Button exitGameBtn;
         AudioSource playerAudio;                                    // Reference to the AudioSource component.
         PlayerMovement playerMovement;                              // Reference to the player's movement.
         PlayerShooting playerShooting;                              // Reference to the PlayerShooting script.
-        public bool isDead;                                                // Whether the player is dead.
+        public bool isDead;                                         // Whether the player is dead.
         bool damaged;                                               // True when the player gets damaged.
 
 
@@ -40,6 +43,7 @@ namespace CompleteProject
             // Set the initial health of the player.
             currentHealth = startingHealth;
             healthSlider.value = currentHealth;
+
         }
 
 
@@ -84,6 +88,8 @@ namespace CompleteProject
                     emotionManager.AddEvent("Player dies");
                 // ... it should die.
                 Death();
+                if (!inTutorial)
+                    EndGame();
             }
             else if (emotionManager)
                 emotionManager.AddEvent("Player takes damage");
@@ -123,10 +129,14 @@ namespace CompleteProject
         }
 
 
-        public void RestartLevel ()
+        void EndGame ()
         {
-            // Reload the level that is currently loaded.
-            SceneManager.LoadScene (0);
+            canvasAnim.SetTrigger("GameOver");
+        }
+
+        public void ExitGame()
+        {
+            SceneManager.LoadSceneAsync(0);
         }
     }
 }

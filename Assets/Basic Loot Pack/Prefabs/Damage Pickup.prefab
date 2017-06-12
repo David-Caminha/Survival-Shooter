@@ -22,6 +22,9 @@ GameObject:
   - component: {fileID: 33577302199693684}
   - component: {fileID: 23251361784752638}
   - component: {fileID: 65210516810206278}
+  - component: {fileID: 114850693210815544}
+  - component: {fileID: 114681790432421662}
+  - component: {fileID: 54362888961814694}
   m_Layer: 0
   m_Name: Damage Pickup
   m_TagString: Untagged
@@ -36,8 +39,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1292798210047148}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -37.62677, y: 1.107, z: -45.521843}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -37.62677, y: 0.3, z: -45.521843}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -80,6 +83,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1292798210047148}
   m_Mesh: {fileID: 4300010, guid: a68ef7cfb5fcf4261818b4614aa2d937, type: 3}
+--- !u!54 &54362888961814694
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1292798210047148}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: Infinity
+  m_AngularDrag: Infinity
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 80
+  m_CollisionDetection: 0
 --- !u!65 &65210516810206278
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -92,3 +110,33 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2, y: 2, z: 2}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114681790432421662
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1292798210047148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2009f55fbd64ca44b888d5eabcde2eae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 12
+  player: {fileID: 0}
+  playerHealth: {fileID: 0}
+  moving: 0
+--- !u!114 &114850693210815544
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1292798210047148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bec40e80652a09443b2492b367844de3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageIncrease: 30
+  rotationSpeed: 70
+  buffTime: 7.5
+  itemMagnet: {fileID: 114681790432421662}

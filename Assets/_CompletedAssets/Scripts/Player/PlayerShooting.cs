@@ -10,7 +10,7 @@ namespace CompleteProject
 
         public int damagePerShot = 20;                  // The damage inflicted by each bullet.
         public int extraDamange = 0;
-        public float timeBetweenBullets = 0.15f;        // The time between each shot.
+        public float timeBetweenBullets = 0.3f;        // The time between each shot.
         public float range = 20f;                       // The distance the gun can fire.
 
         float timer;                                    // A timer to determine when to fire.
@@ -41,7 +41,7 @@ namespace CompleteProject
         void Update ()
         {
             // Add the time since Update was last called to the timer.
-            timer += Time.deltaTime;
+            timer += Time.unscaledDeltaTime;
 
 #if !MOBILE_INPUT
             // If the Fire1 button is being press and it's time to fire...

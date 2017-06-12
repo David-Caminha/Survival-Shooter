@@ -9,13 +9,13 @@ namespace CompleteProject
         public float spawnInterval = 3f;            // How long between each spawn.
         public Transform[] spawnPoints;         // An array of the spawn points this enemy can spawn from.
         public bool spawning = false;
+        public float dropChance = -1;
 
-        public float dropChance = 10;
 
 
-        void Spawn ()
+        void Spawn()
         {
-            if(spawning)
+            if (spawning)
             {
                 // If the player has no health left...
                 if (playerHealth.currentHealth <= 0f)
@@ -30,7 +30,8 @@ namespace CompleteProject
                 // Create an instance of the enemy prefab at the randomly selected spawn point's position and rotation.
                 GameObject enemySpawned = Instantiate(enemy, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
 
-                enemySpawned.GetComponent<EnemyHealth>().dropChance = dropChance;
+                if (dropChance != -1)
+                    enemySpawned.GetComponent<EnemyHealth>().dropChance = dropChance;
 
                 Invoke("Spawn", spawnInterval);
             }

@@ -2,19 +2,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class BossManager : MonoBehaviour
 {
+    public Animator canvasAnim;
+    public Button exitGameBtn;
+    public Text endingText;
+
     public Transform shotOrigin;
-    public GameObject healthBar;
+    public Slider healthBar;
     public EnemyHealth enemyHealth;
+    public GameObject[] enemyGroups;
 
     Animator anim;
-    int bossPhase = 0;
-    float phaseAttackTimer = 5;
-    int attackCycle = 0;
-    float timer;
-    BulletManager bulletManager;
+    public int bossPhase = 0;
+    public float phaseAttackTimer = 2;
+    public int attackCycle = 0;
+    BossBulletManager bulletManager;
+    public int groupIndex = 0;
+    bool gameOver = false;
 
     void Awake()
     {
@@ -25,45 +33,19 @@ public class BossManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        bulletManager = BulletManager.Instance;
+        bulletManager = BossBulletManager.Instance;
         StartCoroutine(Attack());
+        StartCoroutine(GroupManager());
     }
 
-    // Update is called once per frame
     void Update()
     {
-        timer += Time.deltaTime;
-        switch (bossPhase)
+        if (enemyHealth.currentHealth <= 0 && !gameOver)
         {
-            case 0:
-                if (timer > 5)
-                {
-                    anim.SetTrigger("Attack");
-                    timer = 0;
-                }
-                break;
-            case 1:
-                if (timer > 5)
-                {
-                    anim.SetTrigger("Attack");
-                    timer = 0;
-                }
-                break;
-            case 2:
-                if (timer > 4)
-                {
-                    anim.SetTrigger("Attack");
-                    timer = 0;
-                }
-                break;
-            case 3:
-                if (timer > 3)
-                {
-                    anim.SetTrigger("Attack");
-                    timer = 0;
-                }
-                break;
+            gameOver = true;
+            EndGame();
         }
+        healthBar.value = enemyHealth.currentHealth;
     }
 
     IEnumerator Attack()
@@ -71,13 +53,19 @@ public class BossManager : MonoBehaviour
         while(enemyHealth.currentHealth > 0)
         {
             yield return new WaitForSeconds(phaseAttackTimer);
+            if (enemyHealth.currentHealth <= 1500)
+            {
+                bossPhase = 1;
+            }
             if (enemyHealth.currentHealth <= 1000)
             {
-                phaseAttackTimer = 4;
+                phaseAttackTimer = 1.5f;
+                bossPhase = 2;
             }
             if (enemyHealth.currentHealth <= 500)
             {
-                phaseAttackTimer = 3;
+                phaseAttackTimer = 1;
+                bossPhase = 3;
             }
             anim.SetTrigger("Attack");
         }
@@ -185,6 +173,7 @@ public class BossManager : MonoBehaviour
 
     void SpiralAttack(float startOffset = 0, float bulletAngle = 20)
     {
+        StopCoroutine("ShootSpiral");
         StartCoroutine(ShootSpiral(startOffset, bulletAngle));
     }
 
@@ -213,10 +202,143 @@ public class BossManager : MonoBehaviour
         int num = (int) (360 / bulletAngle);
         for(int i = 0; i < num; i++)
         {
-            Debug.Log(i * bulletAngle);
             Quaternion rot = Quaternion.Euler(0, originalRotation.eulerAngles.y + i * bulletAngle, 0);
             bulletManager.Shoot(shotOrigin.position, rot);
             yield return new WaitForSeconds(0.05f);
         }
+    }
+
+    IEnumerator GroupManager()
+    {
+        while(true)
+        {
+            Debug.Log("groupmanager");
+            switch (groupIndex)
+            {
+                case 0:
+                    if (enemyHealth.currentHealth <= 1750)
+                    {
+                        EnemyMovement[] moveScripts = enemyGroups[0].GetComponentsInChildren<EnemyMovement>();
+                        Animator[] anims = enemyGroups[0].GetComponentsInChildren<Animator>();
+                        for (int i = 0; i < moveScripts.Length; i++)
+                        {
+                            anims[i].gameObject.tag = "Enemy";
+                            moveScripts[i].enabled = true;
+                            anims[i].SetTrigger("Moving");
+                        }
+                        groupIndex = 1;
+                    }
+                    break;
+                case 1:
+                    if (enemyHealth.currentHealth <= 1300)
+                    {
+                        EnemyMovement[] moveScripts = enemyGroups[1].GetComponentsInChildren<EnemyMovement>();
+                        Animator[] anims = enemyGroups[1].GetComponentsInChildren<Animator>();
+                        for (int i = 0; i < moveScripts.Length; i++)
+                        {
+                            anims[i].gameObject.tag = "Enemy";
+                            moveScripts[i].enabled = true;
+                            anims[i].SetTrigger("Moving");
+                        }
+                        groupIndex = 2;
+                    }
+                    break;
+                case 2:
+                    if (enemyHealth.currentHealth <= 1000)
+                    {
+                        EnemyMovement[] moveScripts = enemyGroups[2].GetComponentsInChildren<EnemyMovement>();
+                        Animator[] anims = enemyGroups[2].GetComponentsInChildren<Animator>();
+                        for (int i = 0; i < moveScripts.Length; i++)
+                        {
+                            anims[i].gameObject.tag = "Enemy";
+                            moveScripts[i].enabled = true;
+                            anims[i].SetTrigger("Moving");
+                        }
+                        groupIndex++;
+                    }
+                    break;
+                case 3:
+                    if (enemyHealth.currentHealth <= 800)
+                    {
+                        EnemyMovement[] moveScripts = enemyGroups[3].GetComponentsInChildren<EnemyMovement>();
+                        Animator[] anims = enemyGroups[3].GetComponentsInChildren<Animator>();
+                        for (int i = 0; i < moveScripts.Length; i++)
+                        {
+                            anims[i].gameObject.tag = "Enemy";
+                            moveScripts[i].enabled = true;
+                            anims[i].SetTrigger("Moving");
+                        }
+                        groupIndex++;
+                    }
+                    break;
+                case 4:
+                    if (enemyHealth.currentHealth <= 600)
+                    {
+                        EnemyMovement[] moveScripts = enemyGroups[4].GetComponentsInChildren<EnemyMovement>();
+                        Animator[] anims = enemyGroups[4].GetComponentsInChildren<Animator>();
+                        for (int i = 0; i < moveScripts.Length; i++)
+                        {
+                            anims[i].gameObject.tag = "Enemy";
+                            moveScripts[i].enabled = true;
+                            anims[i].SetTrigger("Moving");
+                        }
+                        groupIndex++;
+                    }
+                    break;
+                case 5:
+                    if (enemyHealth.currentHealth <= 500)
+                    {
+                        EnemyMovement[] moveScripts = enemyGroups[5].GetComponentsInChildren<EnemyMovement>();
+                        Animator[] anims = enemyGroups[5].GetComponentsInChildren<Animator>();
+                        for (int i = 0; i < moveScripts.Length; i++)
+                        {
+                            anims[i].gameObject.tag = "Enemy";
+                            moveScripts[i].enabled = true;
+                            anims[i].SetTrigger("Moving");
+                        }
+                        groupIndex++;
+                    }
+                    break;
+                case 6:
+                    if (enemyHealth.currentHealth <= 400)
+                    {
+                        EnemyMovement[] moveScripts = enemyGroups[6].GetComponentsInChildren<EnemyMovement>();
+                        Animator[] anims = enemyGroups[6].GetComponentsInChildren<Animator>();
+                        for (int i = 0; i < moveScripts.Length; i++)
+                        {
+                            anims[i].gameObject.tag = "Enemy";
+                            moveScripts[i].enabled = true;
+                            anims[i].SetTrigger("Moving");
+                        }
+                        groupIndex++;
+                    }
+                    break;
+            }
+            yield return new WaitForSeconds(0.5f);
+        }
+    }
+
+
+    void EndGame()
+    {
+        endingText.text = "GOOD JOB YOU WON! Now if only you had a way to go back home...";
+        exitGameBtn.gameObject.SetActive(false);
+        canvasAnim.SetTrigger("GameOver");
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            enemies[i].GetComponent<Animator>().SetTrigger("Dead");
+        }
+        GameObject[] spectators = GameObject.FindGameObjectsWithTag("Spectator");
+        for (int i = 0; i < spectators.Length; i++)
+        {
+            spectators[i].GetComponent<Animator>().SetTrigger("Dead");
+        }
+        Invoke("MainMenu", 10f);
+    }
+
+    void MainMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 }

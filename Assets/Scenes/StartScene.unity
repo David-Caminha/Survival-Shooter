@@ -14511,7 +14511,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: GAME NAME
+  m_Text: NIGHTMARES
 --- !u!222 &938076671
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -21295,6 +21295,7 @@ MonoBehaviour:
   playerName: 
   emotionalMechanics: 1
   tutorialTime: 0
+  holdingBreath: 0
   ArousalValue: 0
   ValenceValue: 0
   ArousalLevel: 0

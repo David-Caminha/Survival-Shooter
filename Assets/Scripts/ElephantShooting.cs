@@ -5,16 +5,15 @@ using UnityEngine;
 public class ElephantShooting : MonoBehaviour
 {
     GameObject player;
-    int counter;
     BulletManager bulletManager;
 
+    public int counter = 3;
     public bool shoots = false;
     public Transform shotOrigin;
     public int countsBetweenShots = 3;
 
     void Start()
     {
-        counter = 0;
         player = GameObject.FindGameObjectWithTag("Player");
         bulletManager = BulletManager.Instance;
     }

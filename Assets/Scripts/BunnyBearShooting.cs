@@ -5,9 +5,9 @@ using UnityEngine;
 public class BunnyBearShooting : MonoBehaviour {
 
     GameObject player;
-    int counter;
     BulletManager bulletManager;
 
+    public int counter = 3;
     public bool shoots = false;
     public bool isBear = false;
     public Transform shotOrigin;
@@ -15,7 +15,6 @@ public class BunnyBearShooting : MonoBehaviour {
 
     void Start()
     {
-        counter = 3;
         player = GameObject.FindGameObjectWithTag("Player");
         bulletManager = BulletManager.Instance;
     }
@@ -25,7 +24,7 @@ public class BunnyBearShooting : MonoBehaviour {
         if(shoots)
         {
             counter++;
-            if(counter >= countsBetweenShots && Vector3.Distance(transform.position, player.transform.position) < 15)
+            if (counter >= countsBetweenShots && Vector3.Distance(transform.position, player.transform.position) < 15)
             {
                 counter = 0;
                 TakeShot();

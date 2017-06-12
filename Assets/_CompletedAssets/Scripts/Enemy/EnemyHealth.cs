@@ -72,10 +72,10 @@ namespace CompleteProject
         {
             if(emotionManager)
                 emotionManager.AddEvent("Kill " + gameObject.name);
-
+            
             if (dropChance > 0)
                 DropItem();
-
+            
             // The enemy is dead.
             isDead = true;
 
